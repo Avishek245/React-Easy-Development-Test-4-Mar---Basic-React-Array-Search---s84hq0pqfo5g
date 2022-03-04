@@ -29,13 +29,15 @@ const App = () => {
       />
       <h2>Result </h2>
       {searchArray
-        .map((value, key) => {
-          return <div>{value}</div>;
-        })
         .filter((value) => {
-          if (value.toLowerCase().includes(search.toLowerCase())) {
+          if (search === "") {
+            return value;
+          } else if (value.toLowerCase().includes(search.toLowerCase())) {
             return value;
           }
+        })
+        .map((value, key) => {
+          return <div>{value}</div>;
         })}
     </div>
   );
