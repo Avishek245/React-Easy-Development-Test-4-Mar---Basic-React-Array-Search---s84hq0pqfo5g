@@ -18,27 +18,25 @@ const searchArray = [
   "Meta"
 ];
 const App = () => {
-  const [search, setSearchItem] = useState("");
+  const [data, setData] = useState("");
   return (
     <div id="main">
       <h2>Search</h2>
       <input
         type="text"
         id="search-input"
-        onChange={(event) => setSearchItem(event.target.value)}
+        onChange={(event) => setData(event.target.value)}
       />
-      <h2>Result </h2>
-      {searchArray
-        .filter((value) => {
-          if (search === "") {
-            return value;
-          } else if (value.toLowerCase().includes(search.toLowerCase())) {
-            return value;
-          }
-        })
-        .map((value, key) => {
-          return <div>{value}</div>;
-        })}
+      <h2>Result</h2>
+      <ul>
+        {data.length !== 0
+          ? searchArray
+              .filter((value) => value.match(new RegExp(data, "i")))
+              .map((name, key) => {
+                return <li key={key}>{name}</li>;
+              })
+          : null}
+      </ul>
     </div>
   );
 };
